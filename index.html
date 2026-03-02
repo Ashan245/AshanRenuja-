@@ -157,6 +157,129 @@
     </script>
 </body>
 </html>
+
+        .gradient-text { background: linear-gradient(135deg, #fff, #ff3366, #6a11cb); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: 'Playfair Display', serif; }
+
+        /* Music Player */
+        .music-player { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(15px); padding: 25px; border-radius: 30px; width: 100%; max-width: 450px; margin-top: 40px; display: flex; align-items: center; gap: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.4); }
+        .disc { width: 60px; height: 60px; background: linear-gradient(45deg, #ff3366, #6a11cb); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; position: relative; overflow: hidden; }
+        .disc i { animation: beat 2s infinite; }
+        @keyframes beat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+        .spinning { animation: spin 3s linear infinite; }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        .play-btn { width: 45px; height: 45px; border-radius: 50%; border: none; background: #ff3366; color: #fff; cursor: pointer; transition: 0.3s; margin-left: auto; }
+        .play-btn:hover { transform: scale(1.1); background: #6a11cb; }
+
+        /* Social Icons */
+        .social-icons { display: flex; gap: 15px; margin-top: 30px; }
+        .social-icon { width: 45px; height: 45px; border-radius: 50%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: #fff; text-decoration: none; transition: 0.3s; font-size: 1.1rem; }
+        .social-icon:hover { background: #ff3366; transform: translateY(-5px); box-shadow: 0 10px 20px rgba(255, 51, 102, 0.3); }
+
+        footer { padding: 40px; text-align: center; color: rgba(255,255,255,0.3); font-size: 0.75rem; letter-spacing: 1px; }
+    </style>
+</head>
+<body>
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+    <div class="gradient-bg"></div>
+    <div class="particles" id="particles"></div>
+
+    <nav class="navbar">
+        <a href="#" class="nav-link">Home</a>
+        <a href="#music" class="nav-link">Music</a>
+        <a href="#social" class="nav-link">Connect</a>
+    </nav>
+
+    <div class="container">
+        <section class="profile-hero">
+            <div class="photo-wrapper">
+                <img src="1758767410766.jpg" alt="Profile 1" class="profile-img">
+                <img src="1758767366716.jpg" alt="Profile 2" class="profile-img">
+            </div>
+
+            <h1 style="font-size: clamp(2rem, 6vw, 3.5rem);">
+                <span class="gradient-text">සිහින දකින අහස</span>
+            </h1>
+            <p style="color: rgba(255,255,255,0.6); margin-top: 10px; font-weight: 300;">Dreamer | Creator | Billionaire Mindset</p>
+
+            <div class="social-icons" id="social">
+                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-tiktok"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+            </div>
+
+            <div class="music-player" id="music">
+                <div class="disc" id="discIcon">
+                    <i class="fas fa-music"></i>
+                </div>
+                <div style="text-align: left;">
+                    <h4 style="font-size: 0.95rem;">සංගීතයට සවන් දෙන්න</h4>
+                    <p style="font-size: 0.75rem; color: rgba(255,255,255,0.5);">පසුබිම් සංගීතය සක්‍රීය කරන්න</p>
+                </div>
+                <button class="play-btn" id="playBtn">
+                    <i class="fas fa-play"></i>
+                </button>
+            </div>
+            <audio id="bgMusic" loop>
+                <source src="music.mp3" type="audio/mpeg">
+            </audio>
+
+        </section>
+
+        <footer>
+            &copy; 2026 සිහින දකින අහස | All Rights Reserved.
+        </footer>
+    </div>
+
+    <script>
+        // 1. Cursor movement
+        const cursor = document.querySelector('.cursor');
+        const follower = document.querySelector('.cursor-follower');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            setTimeout(() => {
+                follower.style.left = e.clientX + 'px';
+                follower.style.top = e.clientY + 'px';
+            }, 80);
+        });
+
+        // 2. Music Toggle
+        const playBtn = document.getElementById('playBtn');
+        const audio = document.getElementById('bgMusic');
+        const disc = document.getElementById('discIcon');
+        let isPlaying = false;
+
+        playBtn.addEventListener('click', () => {
+            if (!isPlaying) {
+                audio.play();
+                playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                disc.classList.add('spinning');
+                isPlaying = true;
+            } else {
+                audio.pause();
+                playBtn.innerHTML = '<i class="fas fa-play"></i>';
+                disc.classList.remove('spinning');
+                isPlaying = false;
+            }
+        });
+
+        // 3. Background Particles
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 40; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 5 + 's';
+            particlesContainer.appendChild(particle);
+        }
+    </script>
+</body>
+</html>
 t href = link.getAttribute('href');
                 if(href.startsWith('#')) {
                     e.preventDefault();
