@@ -3,44 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>✨ සිහින දකින අහස | ඔබව සාදරයෙන් පිළිගනිමු ✨</title>
+    <title>✨ සිහින දකින අහස | Profile ✨</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', sans-serif; background: #0a0a1a; color: #fff; line-height: 1.6; overflow-x: hidden; cursor: none; }
 
-        /* Cursor & Background Elements */
+        /* Cursor & Background */
         .cursor { width: 10px; height: 10px; background: #ff3366; border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: all 0.1s ease; box-shadow: 0 0 20px #ff3366; }
         .cursor-follower { width: 30px; height: 30px; border: 2px solid rgba(255, 51, 102, 0.3); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9998; transform: translate(-50%, -50%); transition: all 0.3s ease; }
+        
         .gradient-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; background: linear-gradient(-45deg, #0a0a1a, #1a1a2e, #16213e, #0f3460); background-size: 400% 400%; animation: gradient 15s ease infinite; }
         @keyframes gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        
         .particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
         .particle { position: absolute; width: 2px; height: 2px; background: rgba(255, 255, 255, 0.5); border-radius: 50%; animation: float 6s infinite; }
         @keyframes float { 0%, 100% { transform: translateY(0) translateX(0); opacity: 0.5; } 50% { transform: translateY(-30px) translateX(-10px); opacity: 0.3; } }
 
         /* Navigation */
-        .navbar { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 50px; padding: 12px 30px; z-index: 100; display: flex; gap: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .nav-link { color: #fff; text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: 0.3s; }
+        .navbar { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 50px; padding: 12px 30px; z-index: 100; display: flex; gap: 30px; }
+        .nav-link { color: #fff; text-decoration: none; font-size: 0.85rem; transition: 0.3s; letter-spacing: 1px; }
         .nav-link:hover { color: #ff3366; }
 
-        /* Container & Hero */
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-        .badge { background: rgba(255, 51, 102, 0.15); border: 1px solid rgba(255, 51, 102, 0.3); border-radius: 50px; padding: 8px 20px; font-size: 0.8rem; color: #ff3366; margin-bottom: 25px; letter-spacing: 2px; }
-        .gradient-text { background: linear-gradient(135deg, #fff, #ff3366, #6a11cb); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        /* Main Profile Section */
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+        .profile-hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding-top: 80px; }
 
-        /* Video Section - Premium Look */
-        .video-container { position: relative; width: 100%; max-width: 800px; border-radius: 20px; overflow: hidden; background: #000; box-shadow: 0 20px 50px rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.1); margin: 40px 0; }
-        video { width: 100%; display: block; }
-        .video-overlay { position: absolute; bottom: 0; left: 0; width: 100%; padding: 20px; background: linear-gradient(transparent, rgba(0,0,0,0.8)); display: flex; justify-content: space-between; align-items: center; }
+        /* Photos Layout */
+        .photo-wrapper { display: flex; gap: 20px; margin-bottom: 30px; flex-wrap: wrap; justify-content: center; }
+        .profile-img { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; border: 4px solid rgba(255, 51, 102, 0.3); box-shadow: 0 10px 30px rgba(255, 51, 102, 0.2); transition: 0.5s; }
+        .profile-img:hover { transform: scale(1.1) rotate(5deg); border-color: #ff3366; }
+
+        .gradient-text { background: linear-gradient(135deg, #fff, #ff3366, #6a11cb); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: 'Playfair Display', serif; }
+
+        /* Music Player */
+        .music-player { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(15px); padding: 25px; border-radius: 30px; width: 100%; max-width: 450px; margin-top: 40px; display: flex; align-items: center; gap: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.4); }
+        .disc { width: 60px; height: 60px; background: linear-gradient(45deg, #ff3366, #6a11cb); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; position: relative; overflow: hidden; }
+        .disc i { animation: beat 2s infinite; }
+        @keyframes beat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+        .spinning { animation: spin 3s linear infinite; }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        .play-btn { width: 45px; height: 45px; border-radius: 50%; border: none; background: #ff3366; color: #fff; cursor: pointer; transition: 0.3s; margin-left: auto; }
+        .play-btn:hover { transform: scale(1.1); background: #6a11cb; }
 
         /* Social Icons */
         .social-icons { display: flex; gap: 15px; margin-top: 30px; }
-        .social-icon { width: 45px; height: 45px; border-radius: 50%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: #fff; text-decoration: none; transition: 0.3s; }
+        .social-icon { width: 45px; height: 45px; border-radius: 50%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: #fff; text-decoration: none; transition: 0.3s; font-size: 1.1rem; }
         .social-icon:hover { background: #ff3366; transform: translateY(-5px); box-shadow: 0 10px 20px rgba(255, 51, 102, 0.3); }
 
-        footer { padding: 40px; text-align: center; color: rgba(255,255,255,0.3); font-size: 0.8rem; }
+        footer { padding: 40px; text-align: center; color: rgba(255,255,255,0.3); font-size: 0.75rem; letter-spacing: 1px; }
     </style>
 </head>
 <body>
@@ -50,48 +63,56 @@
     <div class="particles" id="particles"></div>
 
     <nav class="navbar">
-        <a href="#home" class="nav-link">මුල් පිටුව</a>
-        <a href="#video-section" class="nav-link">වීඩියෝ</a>
-        <a href="#social" class="nav-link">සම්බන්ධ වන්න</a>
+        <a href="#" class="nav-link">Home</a>
+        <a href="#music" class="nav-link">Music</a>
+        <a href="#social" class="nav-link">Connect</a>
     </nav>
 
     <div class="container">
-        <section id="home" class="hero">
-            <div class="badge"><i class="fas fa-crown"></i> LUXURY MINDSET</div>
-            <h1 style="font-size: clamp(2.5rem, 8vw, 4.5rem); font-family: 'Playfair Display'; line-height: 1.1;">
-                <span class="gradient-text">සිහින</span> දකින<br>
-                <span class="gradient-text">ධනවත්</span> ලෝකය
-            </h1>
-            
-            <div id="video-section" class="video-container">
-                <video id="mainVideo" controls autoplay muted>
-                    <source src="Bilimindset(720p).MP4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                <div class="video-overlay">
-                    <span id="videoTitle" style="font-size: 0.9rem; font-weight: 600; color: #ff3366;">දැන් ප්ලේ වේ: Video 01</span>
-                    <button onclick="nextVideo()" style="background: none; border: none; color: #fff; cursor: pointer; font-size: 1.2rem;"><i class="fas fa-step-forward"></i></button>
-                </div>
+        <section class="profile-hero">
+            <div class="photo-wrapper">
+                <img src="1758767410766.jpg" alt="Profile 1" class="profile-img">
+                <img src="1758767366716.jpg" alt="Profile 2" class="profile-img">
             </div>
 
-            <p style="color: rgba(255,255,255,0.6); max-width: 600px;">ඔබේ ජීවිතය සහ මානසිකත්වය ඉහළට ඔසවා තබන සුවිශේෂී නිර්මාණ පෙළගැස්ම.</p>
+            <h1 style="font-size: clamp(2rem, 6vw, 3.5rem);">
+                <span class="gradient-text">සිහින දකින අහස</span>
+            </h1>
+            <p style="color: rgba(255,255,255,0.6); margin-top: 10px; font-weight: 300;">Dreamer | Creator | Billionaire Mindset</p>
 
             <div class="social-icons" id="social">
                 <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
                 <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
                 <a href="#" class="social-icon"><i class="fab fa-tiktok"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
                 <a href="#" class="social-icon"><i class="fab fa-whatsapp"></i></a>
             </div>
+
+            <div class="music-player" id="music">
+                <div class="disc" id="discIcon">
+                    <i class="fas fa-music"></i>
+                </div>
+                <div style="text-align: left;">
+                    <h4 style="font-size: 0.95rem;">සංගීතයට සවන් දෙන්න</h4>
+                    <p style="font-size: 0.75rem; color: rgba(255,255,255,0.5);">පසුබිම් සංගීතය සක්‍රීය කරන්න</p>
+                </div>
+                <button class="play-btn" id="playBtn">
+                    <i class="fas fa-play"></i>
+                </button>
+            </div>
+            <audio id="bgMusic" loop>
+                <source src="music.mp3" type="audio/mpeg">
+            </audio>
+
         </section>
 
         <footer>
-            &copy; 2026 සිහින දකින අහස | Billionaire Mindset Collection
+            &copy; 2026 සිහින දකින අහස | All Rights Reserved.
         </footer>
     </div>
 
     <script>
-        // 1. Cursor Animation
+        // 1. Cursor movement
         const cursor = document.querySelector('.cursor');
         const follower = document.querySelector('.cursor-follower');
         document.addEventListener('mousemove', (e) => {
@@ -103,36 +124,29 @@
             }, 80);
         });
 
-        // 2. Video Playlist Logic
-        const videoPlayer = document.getElementById('mainVideo');
-        const videoTitle = document.getElementById('videoTitle');
-        
-        const playlist = [
-            "Bilimindset(720p).MP4",
-            "Luxurclasy(720p)_4.MP4",
-            "Trillionairlifestyle(720p).MP4"
-        ];
-        
-        let currentVideoIndex = 0;
+        // 2. Music Toggle
+        const playBtn = document.getElementById('playBtn');
+        const audio = document.getElementById('bgMusic');
+        const disc = document.getElementById('discIcon');
+        let isPlaying = false;
 
-        // වීඩියෝ එක ඉවර වුනාම ඊළඟ එකට යන්න
-        videoPlayer.onended = function() {
-            nextVideo();
-        };
-
-        function nextVideo() {
-            currentVideoIndex++;
-            if (currentVideoIndex >= playlist.length) {
-                currentVideoIndex = 0; // මුල සිට ආරම්භ කරන්න
+        playBtn.addEventListener('click', () => {
+            if (!isPlaying) {
+                audio.play();
+                playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                disc.classList.add('spinning');
+                isPlaying = true;
+            } else {
+                audio.pause();
+                playBtn.innerHTML = '<i class="fas fa-play"></i>';
+                disc.classList.remove('spinning');
+                isPlaying = false;
             }
-            videoPlayer.src = playlist[currentVideoIndex];
-            videoTitle.innerText = "දැන් ප්ලේ වේ: Video 0" + (currentVideoIndex + 1);
-            videoPlayer.play();
-        }
+        });
 
-        // 3. Particles
+        // 3. Background Particles
         const particlesContainer = document.getElementById('particles');
-        for (let i = 0; i < 50; i++) {
+        for (let i = 0; i < 40; i++) {
             const particle = document.createElement('div');
             particle.className = 'particle';
             particle.style.left = Math.random() * 100 + '%';
@@ -143,44 +157,7 @@
     </script>
 </body>
 </html>
-                follower.style.left = e.clientX + 'px';
-                follower.style.top = e.clientY + 'px';
-            }, 80);
-        });
-
-        // Particles
-        const particlesContainer = document.getElementById('particles');
-        for (let i = 0; i < 50; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.top = Math.random() * 100 + '%';
-            particle.style.animationDelay = Math.random() * 5 + 's';
-            particlesContainer.appendChild(particle);
-        }
-
-        // Music Player Toggle
-        const playBtn = document.getElementById('playBtn');
-        const disc = document.getElementById('disc');
-        let isPlaying = false;
-        
-        playBtn.addEventListener('click', () => {
-            isPlaying = !isPlaying;
-            if(isPlaying) {
-                playBtn.innerHTML = '<i class="fas fa-pause"></i>';
-                disc.style.animation = 'spin 2s linear infinite';
-                playBtn.style.background = '#6a11cb';
-            } else {
-                playBtn.innerHTML = '<i class="fas fa-play"></i>';
-                disc.style.animation = 'none';
-                playBtn.style.background = '#ff3366';
-            }
-        });
-
-        // Smooth Scroll
-        document.querySelectorAll('.nav-link, .cta-button').forEach(link => {
-            link.addEventListener('click', (e) => {
-                const href = link.getAttribute('href');
+t href = link.getAttribute('href');
                 if(href.startsWith('#')) {
                     e.preventDefault();
                     document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
