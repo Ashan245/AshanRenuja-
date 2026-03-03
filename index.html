@@ -8,16 +8,11 @@
 <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Sinhala:wght@300;400;500;700&display=swap" rel="stylesheet">
 
-<!-- WATI Chatbot Script (4 times as requested) -->
+<!-- WATI Chatbot Script (4 times) -->
 <script src="https://astra.wati.io/widget/astra.js" id="6229bd7b-2ef1-49ee-bd9c-479f40394020" data-mode="widget" data-from="instruction" defer></script>
 <script src="https://astra.wati.io/widget/astra.js" id="6229bd7b-2ef1-49ee-bd9c-479f40394020" data-mode="widget" data-from="instruction" defer></script>
 <script src="https://astra.wati.io/widget/astra.js" id="6229bd7b-2ef1-49ee-bd9c-479f40394020" data-mode="widget" data-from="instruction" defer></script>
 <script src="https://astra.wati.io/widget/astra.js" id="6229bd7b-2ef1-49ee-bd9c-479f40394020" data-mode="widget" data-from="instruction" defer></script>
-
-<!-- Audio Player - Hidden but plays automatically at 50% volume -->
-<audio id="bgSong" loop>
-  <source src="One Day - ARASH feat Helena __ One Day I_m Gonna Fly Away [Lirik Video](MP3_160K).mp3" type="audio/mpeg">
-</audio>
 
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -68,115 +63,139 @@ body {
 }
 #orbiting-photo img { width: 100%; height: 100%; object-fit: cover; }
 
-/* ===== ANIMATION 3: Name Letters Floating All Over (Song Rhythm Based) ===== */
-@keyframes floatRhythm {
-  0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 0.9; }
-  25% { transform: translate(30vw, -20vh) scale(1.3) rotate(180deg); opacity: 1; }
-  50% { transform: translate(70vw, 30vh) scale(0.8) rotate(360deg); opacity: 0.8; }
-  75% { transform: translate(20vw, 70vh) scale(1.4) rotate(540deg); opacity: 1; }
-  100% { transform: translate(0, 0) scale(1) rotate(720deg); opacity: 0.9; }
+/* ===== ANIMATION 3: Name Letters Floating (Working Version) ===== */
+@keyframes floatAround {
+  0% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+  20% { transform: translate(20vw, -15vh) rotate(180deg); }
+  40% { transform: translate(60vw, 20vh) rotate(360deg); }
+  60% { transform: translate(40vw, 70vh) rotate(540deg); }
+  80% { transform: translate(10vw, 40vh) rotate(720deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
 }
-.rhythm-letter {
+.floating-letter {
   position: fixed;
   width: 50px;
   height: 50px;
-  background: linear-gradient(145deg, #f43f5e, #c084fc);
+  background: linear-gradient(145deg, #f43f5e, #8b5cf6);
   color: white;
-  font-size: 22px;
+  font-size: 24px;
   font-weight: bold;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  box-shadow: 0 0 40px #f9a8d4;
+  box-shadow: 0 0 30px #f472b6;
   z-index: 998;
   pointer-events: none;
   border: 2px solid rgba(255,255,255,0.5);
-  animation: floatRhythm 10s infinite alternate ease-in-out;
+  animation: floatAround 15s infinite alternate ease-in-out;
   animation-delay: var(--delay);
-  left: var(--start-left);
-  top: var(--start-top);
+  left: var(--left);
+  top: var(--top);
 }
 
 /* ===== ANIMATION 4: 10 Hearts Floating ===== */
-@keyframes heartBeat {
-  0% { transform: translate(0, 0) scale(1); opacity: 0.7; }
-  20% { transform: translate(15vw, -25vh) scale(1.3); opacity: 1; }
-  40% { transform: translate(60vw, 15vh) scale(0.9); opacity: 0.8; }
-  60% { transform: translate(80vw, 60vh) scale(1.4); opacity: 1; }
-  80% { transform: translate(30vw, 85vh) scale(1.1); opacity: 0.9; }
-  100% { transform: translate(0, 0) scale(1); opacity: 0.7; }
+@keyframes heartFloat {
+  0% { transform: translate(0, 0) scale(1); opacity: 0.8; }
+  25% { transform: translate(25vw, -20vh) scale(1.3); opacity: 1; }
+  50% { transform: translate(70vw, 30vh) scale(0.9); opacity: 0.9; }
+  75% { transform: translate(30vw, 80vh) scale(1.4); opacity: 1; }
+  100% { transform: translate(0, 0) scale(1); opacity: 0.8; }
 }
 .floating-heart {
   position: fixed;
-  font-size: 34px;
-  z-index: 996;
+  font-size: 36px;
+  z-index: 997;
   pointer-events: none;
   filter: drop-shadow(0 0 20px #ff4d6d);
-  animation: heartBeat 16s infinite alternate;
+  animation: heartFloat 18s infinite alternate;
   animation-delay: var(--delay);
-  left: var(--start-left);
-  top: var(--start-top);
+  left: var(--left);
+  top: var(--top);
 }
 
-/* ===== ANIMATION 5: New Icons Floating (🥁💿🎙️🌹🌺🏵️) ===== */
+/* ===== ANIMATION 5: Icons Floating (🥁💿🎙️🌹🌺🏵️) ===== */
 @keyframes iconFloat {
-  0% { transform: translate(0, 0) rotate(0deg); }
-  25% { transform: translate(-20vw, 15vh) rotate(90deg); }
-  50% { transform: translate(40vw, -30vh) rotate(180deg); }
-  75% { transform: translate(-30vw, -40vh) rotate(270deg); }
-  100% { transform: translate(0, 0) rotate(360deg); }
+  0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+  25% { transform: translate(-15vw, 20vh) rotate(120deg) scale(1.2); }
+  50% { transform: translate(50vw, -20vh) rotate(240deg) scale(0.8); }
+  75% { transform: translate(-30vw, 50vh) rotate(360deg) scale(1.3); }
+  100% { transform: translate(0, 0) rotate(0deg) scale(1); }
 }
 .floating-icon {
   position: fixed;
-  font-size: 40px;
-  z-index: 995;
+  font-size: 42px;
+  z-index: 996;
   pointer-events: none;
-  filter: drop-shadow(0 0 25px gold);
+  filter: drop-shadow(0 0 25px #fbbf24);
   animation: iconFloat 20s infinite alternate;
   animation-delay: var(--delay);
-  left: var(--start-left);
-  top: var(--start-top);
+  left: var(--left);
+  top: var(--top);
 }
 
 /* ===== ANIMATION 6: Star Floating ===== */
-@keyframes starFloat {
-  0% { left: 10%; top: 15%; transform: scale(1) rotate(0deg); }
-  25% { left: 80%; top: 20%; transform: scale(1.4) rotate(90deg); }
-  50% { left: 85%; top: 70%; transform: scale(0.8) rotate(180deg); }
-  75% { left: 30%; top: 85%; transform: scale(1.3) rotate(270deg); }
-  100% { left: 10%; top: 15%; transform: scale(1) rotate(360deg); }
+@keyframes starPath {
+  0% { left: 5%; top: 10%; transform: scale(1) rotate(0deg); }
+  20% { left: 80%; top: 15%; transform: scale(1.3) rotate(90deg); }
+  40% { left: 90%; top: 60%; transform: scale(0.9) rotate(180deg); }
+  60% { left: 60%; top: 90%; transform: scale(1.4) rotate(270deg); }
+  80% { left: 20%; top: 70%; transform: scale(1.1) rotate(360deg); }
+  100% { left: 5%; top: 10%; transform: scale(1) rotate(0deg); }
 }
 #floating-star {
   position: fixed;
-  font-size: 40px;
-  z-index: 997;
+  font-size: 44px;
+  z-index: 995;
   pointer-events: none;
-  filter: drop-shadow(0 0 25px #fbbf24);
-  animation: starFloat 22s infinite alternate;
+  filter: drop-shadow(0 0 30px #fbbf24);
+  animation: starPath 22s infinite alternate;
 }
 
-/* ===== Volume Control ===== */
+/* ===== Audio and Volume Control ===== */
 #volume-control {
   position: fixed;
   bottom: 100px;
   right: 20px;
   z-index: 1000;
-  background: rgba(0,0,0,0.7);
-  backdrop-filter: blur(8px);
-  padding: 10px 15px;
+  background: rgba(0,0,0,0.8);
+  backdrop-filter: blur(10px);
+  padding: 12px 20px;
   border-radius: 50px;
   border: 1px solid #f43f5e;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 15px;
   color: white;
 }
-#volume-slider { width: 100px; cursor: pointer; }
+#volume-slider {
+  width: 120px;
+  height: 5px;
+  -webkit-appearance: none;
+  background: linear-gradient(to right, #f43f5e, #8b5cf6);
+  border-radius: 5px;
+  outline: none;
+}
+#volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  background: white;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid #f43f5e;
+}
+#volume-percent { min-width: 45px; }
 
 /* Section animations */
-@keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
-.section-card { animation: slideUp 0.7s ease forwards; opacity: 0; }
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.section-card {
+  animation: slideUp 0.7s ease forwards;
+  opacity: 0;
+}
 .delay-1 { animation-delay: 0.2s; }
 .delay-2 { animation-delay: 0.4s; }
 .delay-3 { animation-delay: 0.6s; }
@@ -192,7 +211,7 @@ body {
 
 /* Name Gradient */
 .name-gradient {
-  background: linear-gradient(135deg, #fff 20%, #f43f5e 40%, #c084fc 60%, #fff 80%);
+  background: linear-gradient(135deg, #fff 20%, #f43f5e 40%, #8b5cf6 60%, #fff 80%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -207,44 +226,63 @@ body {
 /* WhatsApp Pulse */
 .wa-pulse { animation: pulse-green 2s infinite; }
 @keyframes pulse-green { 0% { box-shadow: 0 0 0 0 #22c55e; } 70% { box-shadow: 0 0 0 18px transparent; } }
+
+/* Force all floating elements to be visible */
+.floating-letter, .floating-heart, .floating-icon, #floating-star, #orbiting-photo {
+  display: block !important;
+}
 </style>
 </head>
 <body>
 
-<!-- AUDIO: Plays automatically at 50% volume -->
+<!-- AUDIO - Fixed auto-play -->
+<audio id="bgSong" loop preload="auto">
+  <source src="One Day - ARASH feat Helena __ One Day I_m Gonna Fly Away [Lirik Video](MP3_160K).mp3" type="audio/mpeg">
+</audio>
+
 <script>
-  window.addEventListener('load', function() {
-    const audio = document.getElementById('bgSong');
-    if(audio) {
-      audio.volume = 0.5; // Set to 50% volume
-      audio.play().catch(e => console.log('Auto-play prevented, user must interact first'));
+// Force audio to play on page load with user interaction simulation
+window.addEventListener('load', function() {
+  const audio = document.getElementById('bgSong');
+  if(audio) {
+    audio.volume = 0.5; // Set to 50%
+    
+    // Try to play automatically
+    let playPromise = audio.play();
+    
+    if (playPromise !== undefined) {
+      playPromise.catch(error => {
+        console.log("Auto-play prevented, waiting for user interaction");
+        // Add one-time click handler to start audio
+        document.body.addEventListener('click', function initAudio() {
+          audio.play();
+          document.body.removeEventListener('click', initAudio);
+        }, { once: true });
+      });
     }
-  });
+  }
+});
 </script>
 
-<!-- Volume Control Slider -->
+<!-- Volume Control -->
 <div id="volume-control">
-  <iconify-icon icon="mdi:music" class="text-pink-400"></iconify-icon>
+  <iconify-icon icon="mdi:music-note" class="text-pink-400 text-xl"></iconify-icon>
   <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.5">
   <span id="volume-percent">50%</span>
 </div>
 
-<!-- ORBITING PHOTO (1758767366716.jpg) -->
+<!-- ORBITING PHOTO (ANIMATION 2) -->
 <div id="orbiting-photo">
-  <img src="1758767366716.jpg" alt="orbit" onerror="this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22100%22%20height%3D%22100%22%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2245%22%20fill%3D%22%23f43f5e%22%2F%3E%3Ctext%20x%3D%2250%22%20y%3D%2265%22%20font-size%3D%2230%22%20fill%3D%22white%22%20text-anchor%3D%22middle%22%3EAR%3C%2Ftext%3E%3C%2Fsvg%3E'">
+  <img src="1758767366716.jpg" alt="orbiting" onerror="this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22100%22%20height%3D%22100%22%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2245%22%20fill%3D%22%23f43f5e%22%2F%3E%3Ctext%20x%3D%2250%22%20y%3D%2265%22%20font-size%3D%2230%22%20fill%3D%22white%22%20text-anchor%3D%22middle%22%3EAR%3C%2Ftext%3E%3C%2Fsvg%3E'">
 </div>
 
-<!-- FLOATING STAR -->
+<!-- FLOATING STAR (ANIMATION 6) -->
 <div id="floating-star">⭐</div>
 
-<!-- NAME LETTERS (Rhythm Based) -->
-<div id="rhythm-letters-container"></div>
-
-<!-- 10 HEARTS -->
-<div id="hearts-container"></div>
-
-<!-- NEW ICONS (🥁 💿 🎙️ 🌹 🌺 🏵️) -->
-<div id="icons-container"></div>
+<!-- CONTAINERS for dynamic elements -->
+<div id="floating-letters-container"></div>
+<div id="floating-hearts-container"></div>
+<div id="floating-icons-container"></div>
 
 <!-- NAVIGATION -->
 <nav class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-xl border-b border-pink-500/20 py-3">
@@ -258,7 +296,7 @@ body {
     </div>
     <div class="flex gap-2">
       <button class="px-4 py-1.5 bg-pink-600/20 border border-pink-500/30 rounded-full text-pink-300 text-sm">CV</button>
-      <button onclick="alert('WhatsApp: +94754806291')" class="px-4 py-1.5 bg-green-600/20 border border-green-500/30 rounded-full text-green-300 text-sm flex items-center gap-1"><iconify-icon icon="mdi:whatsapp"></iconify-icon> Chat</button>
+      <button onclick="window.open('https://wa.me/94754806291')" class="px-4 py-1.5 bg-green-600/20 border border-green-500/30 rounded-full text-green-300 text-sm flex items-center gap-1"><iconify-icon icon="mdi:whatsapp"></iconify-icon> Chat</button>
     </div>
   </div>
 </nav>
@@ -281,7 +319,7 @@ body {
         <!-- Contact Info -->
         <div class="space-y-2 mb-6 text-slate-300">
           <div class="flex items-center gap-3"><iconify-icon icon="mdi:map-marker" class="text-pink-400"></iconify-icon> Lassegama Estate, Deraniyagala, Sri Lanka</div>
-          <div class="flex items-center gap-3"><iconify-icon icon="mdi:whatsapp" class="text-green-400"></iconify-icon> +94 75 480 6291 (WhatsApp / Mobile)</div>
+          <div class="flex items-center gap-3"><iconify-icon icon="mdi:whatsapp" class="text-green-400"></iconify-icon> +94 75 480 6291</div>
           <div class="flex items-center gap-3"><iconify-icon icon="mdi:email" class="text-pink-400"></iconify-icon> ashanrenuja889@gmail.com</div>
           <div class="flex items-center gap-3"><iconify-icon icon="mdi:linkedin" class="text-blue-400"></iconify-icon> linkedin.com/in/ashan-renuja1</div>
         </div>
@@ -308,7 +346,7 @@ body {
         </div>
       </div>
 
-      <!-- RIGHT: Main Photo with SWAY -->
+      <!-- RIGHT: Main Photo with SWAY (ANIMATION 1) -->
       <div class="relative flex justify-center">
         <div class="relative w-72 h-72 md:w-96 md:h-96 photo-sway">
           <div class="absolute inset-0 rounded-full bg-gradient-to-r from-pink-600 to-purple-600 blur-3xl opacity-30"></div>
@@ -325,7 +363,7 @@ body {
   </div>
 </section>
 
-<!-- DETAIL SECTIONS (Same as before) -->
+<!-- DETAIL SECTIONS -->
 <div class="max-w-6xl mx-auto px-6 pb-20 space-y-6">
   <!-- Experience -->
   <div class="section-card delay-1 glass-panel p-6">
@@ -333,78 +371,82 @@ body {
     <div class="border-l-2 border-pink-500/30 pl-4">
       <div class="mb-3">
         <div class="font-semibold text-white">Freelance Graphic Designer</div>
-        <div class="text-sm text-pink-300">Graphic Designer · July 2025 - Present (7 months)</div>
+        <div class="text-sm text-pink-300">July 2025 - Present (7 months)</div>
         <p class="text-sm text-slate-400 mt-1">Self-employed freelance work creating brand identities, social media graphics, and print materials.</p>
       </div>
     </div>
   </div>
+  
   <!-- Education -->
   <div class="section-card delay-2 glass-panel p-6">
     <h2 class="text-2xl font-bold text-white mb-4 flex items-center gap-2"><iconify-icon icon="mdi:school" class="text-purple-400"></iconify-icon> අධ්‍යාපනය / Education</h2>
     <div class="space-y-3">
-      <div><div class="font-semibold text-white">Technical College Ratnapura</div><div class="text-sm text-purple-300">National Certificate in Graphic Design · (July 2025 - Dec 2025)</div></div>
-      <div><div class="font-semibold text-white">Ratnapura College of Technology</div><div class="text-sm text-purple-300">Certificate in Graphic Designing · (June 2025 - Dec 2025)</div></div>
-      <div><div class="font-semibold text-white">College of Technology - Ratnapura</div><div class="text-sm text-purple-300">Graphic Design Program</div></div>
+      <div><div class="font-semibold text-white">Technical College Ratnapura</div><div class="text-sm text-purple-300">National Certificate in Graphic Design (July 2025 - Dec 2025)</div></div>
+      <div><div class="font-semibold text-white">Ratnapura College of Technology</div><div class="text-sm text-purple-300">Certificate in Graphic Designing (June 2025 - Dec 2025)</div></div>
     </div>
   </div>
+  
   <!-- Skills -->
   <div class="section-card delay-3 glass-panel p-6">
     <h2 class="text-2xl font-bold text-white mb-4 flex items-center gap-2"><iconify-icon icon="mdi:star" class="text-yellow-400"></iconify-icon> කුසලතා / Skills</h2>
-    <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-      <div class="bg-pink-500/10 p-3 rounded-xl text-center border border-pink-500/20"><div class="text-2xl mb-1">🎨</div><div class="font-medium text-white">Graphic Design</div></div>
-      <div class="bg-purple-500/10 p-3 rounded-xl text-center border border-purple-500/20"><div class="text-2xl mb-1">📷</div><div class="font-medium text-white">Photoshop</div></div>
-      <div class="bg-blue-500/10 p-3 rounded-xl text-center border border-blue-500/20"><div class="text-2xl mb-1">✒️</div><div class="font-medium text-white">Illustrator</div></div>
+    <div class="grid grid-cols-3 gap-3">
+      <div class="bg-pink-500/10 p-3 rounded-xl text-center"><div class="text-2xl mb-1">🎨</div><div>Graphic Design</div></div>
+      <div class="bg-purple-500/10 p-3 rounded-xl text-center"><div class="text-2xl mb-1">📷</div><div>Photoshop</div></div>
+      <div class="bg-blue-500/10 p-3 rounded-xl text-center"><div class="text-2xl mb-1">✒️</div><div>Illustrator</div></div>
     </div>
   </div>
-  <!-- Contact Card -->
+  
+  <!-- Contact -->
   <div class="section-card delay-4 glass-panel p-6 text-center">
-    <h2 class="text-xl font-bold text-white mb-2">📞 කතා කරන්න / Get in Touch</h2>
-    <div class="flex justify-center gap-6 text-sm"><div><iconify-icon icon="mdi:whatsapp" class="text-green-400 inline"></iconify-icon> +94 75 480 6291</div><div><iconify-icon icon="mdi:email" class="text-pink-400 inline"></iconify-icon> ashanrenuja889@gmail.com</div></div>
+    <h2 class="text-xl font-bold text-white mb-2">📞 Get in Touch</h2>
+    <div class="flex justify-center gap-6 text-sm">
+      <div><iconify-icon icon="mdi:whatsapp" class="text-green-400"></iconify-icon> +94 75 480 6291</div>
+      <div><iconify-icon icon="mdi:email" class="text-pink-400"></iconify-icon> ashanrenuja889@gmail.com</div>
+    </div>
   </div>
 </div>
 
 <script>
-// ===== CREATE RHYTHM LETTERS (ANIMATION 3 - Song Rhythm Based) =====
-function createRhythmLetters() {
-  const container = document.getElementById('rhythm-letters-container');
+// ===== CREATE FLOATING LETTERS (ANIMATION 3) =====
+function createFloatingLetters() {
+  const container = document.getElementById('floating-letters-container');
   if (!container) return;
   container.innerHTML = '';
   const name = "ASHANRENUJA"; // 11 letters
-  const letters = name.split('');
   
-  letters.forEach((letter, i) => {
-    const el = document.createElement('div');
-    el.className = 'rhythm-letter';
-    el.textContent = letter;
-    // Random start position
-    el.style.setProperty('--start-left', Math.random() * 100 + '%');
-    el.style.setProperty('--start-top', Math.random() * 100 + '%');
-    // Different delays for each letter to follow song rhythm
-    el.style.setProperty('--delay', `${i * 0.3}s`);
-    container.appendChild(el);
-  });
+  for(let i = 0; i < name.length; i++) {
+    const letter = document.createElement('div');
+    letter.className = 'floating-letter';
+    letter.textContent = name[i];
+    // Random starting positions
+    letter.style.setProperty('--left', Math.random() * 90 + 5 + '%');
+    letter.style.setProperty('--top', Math.random() * 90 + 5 + '%');
+    // Different delays for rhythm effect
+    letter.style.setProperty('--delay', (i * 0.3) + 's');
+    container.appendChild(letter);
+  }
 }
 
-// ===== CREATE 10 HEARTS =====
+// ===== CREATE 10 HEARTS (ANIMATION 4) =====
 function createHearts() {
-  const container = document.getElementById('hearts-container');
+  const container = document.getElementById('floating-hearts-container');
   if (!container) return;
   container.innerHTML = '';
   
-  for (let i = 0; i < 10; i++) {
+  for(let i = 0; i < 10; i++) {
     const heart = document.createElement('div');
     heart.className = 'floating-heart';
     heart.innerHTML = '❤️';
-    heart.style.setProperty('--start-left', Math.random() * 100 + '%');
-    heart.style.setProperty('--start-top', Math.random() * 100 + '%');
-    heart.style.setProperty('--delay', `${i * 0.5}s`);
+    heart.style.setProperty('--left', Math.random() * 90 + 5 + '%');
+    heart.style.setProperty('--top', Math.random() * 90 + 5 + '%');
+    heart.style.setProperty('--delay', (i * 0.4) + 's');
     container.appendChild(heart);
   }
 }
 
-// ===== CREATE NEW ICONS (🥁💿🎙️🌹🌺🏵️) =====
+// ===== CREATE ICONS (ANIMATION 5) =====
 function createIcons() {
-  const container = document.getElementById('icons-container');
+  const container = document.getElementById('floating-icons-container');
   if (!container) return;
   container.innerHTML = '';
   
@@ -412,16 +454,4 @@ function createIcons() {
   
   icons.forEach((icon, i) => {
     const el = document.createElement('div');
-    el.className = 'floating-icon';
-    el.innerHTML = icon;
-    el.style.setProperty('--start-left', Math.random() * 100 + '%');
-    el.style.setProperty('--start-top', Math.random() * 100 + '%');
-    el.style.setProperty('--delay', `${i * 0.7}s`);
-    container.appendChild(el);
-  });
-}
-
-// ===== VOLUME CONTROL =====
-const audio = document.getElementById('bgSong');
-const slider = document.getElementById('volume-slider');
-const percent = do
+    el.className = 'fl
