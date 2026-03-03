@@ -3,12 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>අශාන් රේණුජ | Ashan Renuja — Graphic Designer</title>
+<title>අශාන් රේණුජ | Ashan Renuja — One Day</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Sinhala:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<!-- WATI Chatbot Script (4 times as requested) -->
+<script src="https://astra.wati.io/widget/astra.js" id="6229bd7b-2ef1-49ee-bd9c-479f40394020" data-mode="widget" data-from="instruction" defer></script>
+<script src="https://astra.wati.io/widget/astra.js" id="6229bd7b-2ef1-49ee-bd9c-479f40394020" data-mode="widget" data-from="instruction" defer></script>
+<script src="https://astra.wati.io/widget/astra.js" id="6229bd7b-2ef1-49ee-bd9c-479f40394020" data-mode="widget" data-from="instruction" defer></script>
+<script src="https://astra.wati.io/widget/astra.js" id="6229bd7b-2ef1-49ee-bd9c-479f40394020" data-mode="widget" data-from="instruction" defer></script>
+
+<!-- Audio Player - Hidden but plays automatically at 50% volume -->
+<audio id="bgSong" loop>
+  <source src="One Day - ARASH feat Helena __ One Day I_m Gonna Fly Away [Lirik Video](MP3_160K).mp3" type="audio/mpeg">
+</audio>
+
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
 body {
   font-family: 'Inter', 'Noto Sans Sinhala', sans-serif;
   background: #030304;
@@ -16,220 +28,278 @@ body {
   overflow-x: hidden;
 }
 
-/* ===== ANIMATION 1: Photo Sway (Main Photo) ===== */
-@keyframes gentleSway {
+/* ===== ANIMATION 1: Main Photo Sway ===== */
+@keyframes sway {
   0% { transform: translateX(-20px) rotate(-3deg); }
-  25% { transform: translateX(10px) rotate(2deg); }
-  50% { transform: translateX(20px) rotate(3deg); }
-  75% { transform: translateX(5px) rotate(1deg); }
+  25% { transform: translateX(15px) rotate(3deg); }
+  50% { transform: translateX(25px) rotate(5deg); }
+  75% { transform: translateX(10px) rotate(2deg); }
   100% { transform: translateX(-20px) rotate(-3deg); }
 }
 .photo-sway {
-  animation: gentleSway 6s ease-in-out infinite;
-  filter: drop-shadow(0 0 25px #6366f1);
+  animation: sway 6s ease-in-out infinite;
+  filter: drop-shadow(0 0 30px #ff69b4);
 }
 
-/* ===== ANIMATION 2: Photo Orbit (Floating Photo) ===== */
+/* ===== ANIMATION 2: Orbiting Photo ===== */
 @keyframes orbitAround {
-  0% { left: 2%; top: 10%; }
-  12% { left: 90%; top: 5%; }
-  25% { left: 96%; top: 40%; }
-  37% { left: 88%; top: 85%; }
-  50% { left: 50%; top: 95%; }
-  62% { left: 12%; top: 85%; }
-  75% { left: 4%; top: 50%; }
-  87% { left: 8%; top: 15%; }
-  100% { left: 2%; top: 10%; }
+  0% { left: 2%; top: 5%; transform: rotate(0deg); }
+  12% { left: 88%; top: 8%; transform: rotate(45deg); }
+  25% { left: 94%; top: 40%; transform: rotate(90deg); }
+  37% { left: 86%; top: 80%; transform: rotate(135deg); }
+  50% { left: 50%; top: 92%; transform: rotate(180deg); }
+  62% { left: 14%; top: 82%; transform: rotate(225deg); }
+  75% { left: 6%; top: 50%; transform: rotate(270deg); }
+  87% { left: 12%; top: 18%; transform: rotate(315deg); }
+  100% { left: 2%; top: 5%; transform: rotate(360deg); }
 }
 #orbiting-photo {
   position: fixed;
   width: 70px;
   height: 70px;
   border-radius: 50%;
-  border: 3px solid #a855f7;
+  border: 3px solid #f43f5e;
   overflow: hidden;
   z-index: 999;
-  animation: orbitAround 20s linear infinite;
-  box-shadow: 0 0 30px #c084fc, 0 0 60px #6366f1;
+  animation: orbitAround 24s linear infinite;
+  box-shadow: 0 0 30px #f43f5e, 0 0 60px #8b5cf6;
   pointer-events: none;
   background: #0f0f1f;
 }
-#orbiting-photo img {
-  width: 100%; height: 100%; object-fit: cover;
-}
+#orbiting-photo img { width: 100%; height: 100%; object-fit: cover; }
 
-/* ===== ANIMATION 3: Name Letters Orbit ===== */
-@keyframes letterSpin {
-  0% { transform: rotate(0deg) translateX(160px) rotate(0deg); }
-  100% { transform: rotate(360deg) translateX(160px) rotate(-360deg); }
+/* ===== ANIMATION 3: Name Letters Floating All Over (Song Rhythm Based) ===== */
+@keyframes floatRhythm {
+  0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 0.9; }
+  25% { transform: translate(30vw, -20vh) scale(1.3) rotate(180deg); opacity: 1; }
+  50% { transform: translate(70vw, 30vh) scale(0.8) rotate(360deg); opacity: 0.8; }
+  75% { transform: translate(20vw, 70vh) scale(1.4) rotate(540deg); opacity: 1; }
+  100% { transform: translate(0, 0) scale(1) rotate(720deg); opacity: 0.9; }
 }
-.orbit-letter {
+.rhythm-letter {
   position: fixed;
-  left: 50%;
-  top: 50%;
-  width: 44px;
-  height: 44px;
-  margin-left: -22px;
-  margin-top: -22px;
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(145deg, #f43f5e, #c084fc);
+  color: white;
+  font-size: 22px;
+  font-weight: bold;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
-  font-weight: 800;
-  background: linear-gradient(145deg, #4f46e5, #9333ea);
-  color: white;
   border-radius: 50%;
-  box-shadow: 0 0 30px #a78bfa;
+  box-shadow: 0 0 40px #f9a8d4;
   z-index: 998;
   pointer-events: none;
-  border: 2px solid rgba(255,255,255,0.3);
-  animation: letterSpin 14s linear infinite;
+  border: 2px solid rgba(255,255,255,0.5);
+  animation: floatRhythm 10s infinite alternate ease-in-out;
   animation-delay: var(--delay);
+  left: var(--start-left);
+  top: var(--start-top);
 }
 
-/* ===== ANIMATION 4: Star Orbit ===== */
-@keyframes starPath {
-  0% { left: 5%; top: 15%; }
-  10% { left: 80%; top: 8%; }
-  20% { left: 94%; top: 25%; }
-  30% { left: 88%; top: 60%; }
-  40% { left: 70%; top: 85%; }
-  50% { left: 45%; top: 92%; }
-  60% { left: 20%; top: 80%; }
-  70% { left: 8%; top: 60%; }
-  80% { left: 12%; top: 35%; }
-  90% { left: 30%; top: 18%; }
-  100% { left: 5%; top: 15%; }
+/* ===== ANIMATION 4: 10 Hearts Floating ===== */
+@keyframes heartBeat {
+  0% { transform: translate(0, 0) scale(1); opacity: 0.7; }
+  20% { transform: translate(15vw, -25vh) scale(1.3); opacity: 1; }
+  40% { transform: translate(60vw, 15vh) scale(0.9); opacity: 0.8; }
+  60% { transform: translate(80vw, 60vh) scale(1.4); opacity: 1; }
+  80% { transform: translate(30vw, 85vh) scale(1.1); opacity: 0.9; }
+  100% { transform: translate(0, 0) scale(1); opacity: 0.7; }
 }
-@keyframes glitter {
-  0%,100% { transform: scale(1) rotate(0deg); opacity: 0.7; }
-  50% { transform: scale(1.7) rotate(180deg); opacity: 1; }
-}
-#orbit-star {
+.floating-heart {
   position: fixed;
-  font-size: 30px;
+  font-size: 34px;
+  z-index: 996;
+  pointer-events: none;
+  filter: drop-shadow(0 0 20px #ff4d6d);
+  animation: heartBeat 16s infinite alternate;
+  animation-delay: var(--delay);
+  left: var(--start-left);
+  top: var(--start-top);
+}
+
+/* ===== ANIMATION 5: New Icons Floating (🥁💿🎙️🌹🌺🏵️) ===== */
+@keyframes iconFloat {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(-20vw, 15vh) rotate(90deg); }
+  50% { transform: translate(40vw, -30vh) rotate(180deg); }
+  75% { transform: translate(-30vw, -40vh) rotate(270deg); }
+  100% { transform: translate(0, 0) rotate(360deg); }
+}
+.floating-icon {
+  position: fixed;
+  font-size: 40px;
+  z-index: 995;
+  pointer-events: none;
+  filter: drop-shadow(0 0 25px gold);
+  animation: iconFloat 20s infinite alternate;
+  animation-delay: var(--delay);
+  left: var(--start-left);
+  top: var(--start-top);
+}
+
+/* ===== ANIMATION 6: Star Floating ===== */
+@keyframes starFloat {
+  0% { left: 10%; top: 15%; transform: scale(1) rotate(0deg); }
+  25% { left: 80%; top: 20%; transform: scale(1.4) rotate(90deg); }
+  50% { left: 85%; top: 70%; transform: scale(0.8) rotate(180deg); }
+  75% { left: 30%; top: 85%; transform: scale(1.3) rotate(270deg); }
+  100% { left: 10%; top: 15%; transform: scale(1) rotate(360deg); }
+}
+#floating-star {
+  position: fixed;
+  font-size: 40px;
   z-index: 997;
   pointer-events: none;
-  animation: starPath 18s linear infinite;
-  filter: drop-shadow(0 0 15px #f472b6);
-}
-#orbit-star span {
-  display: block;
-  animation: glitter 2.5s ease-in-out infinite;
-  transform: translate(-50%,-50%);
+  filter: drop-shadow(0 0 25px #fbbf24);
+  animation: starFloat 22s infinite alternate;
 }
 
-/* ===== SECTION ANIMATIONS ===== */
-@keyframes slideIn {
-  from { opacity: 0; transform: translateY(40px); }
-  to { opacity: 1; transform: translateY(0); }
+/* ===== Volume Control ===== */
+#volume-control {
+  position: fixed;
+  bottom: 100px;
+  right: 20px;
+  z-index: 1000;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(8px);
+  padding: 10px 15px;
+  border-radius: 50px;
+  border: 1px solid #f43f5e;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
 }
-.section-card {
-  animation: slideIn 0.8s ease-out forwards;
-  opacity: 0;
-}
+#volume-slider { width: 100px; cursor: pointer; }
+
+/* Section animations */
+@keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+.section-card { animation: slideUp 0.7s ease forwards; opacity: 0; }
 .delay-1 { animation-delay: 0.2s; }
 .delay-2 { animation-delay: 0.4s; }
 .delay-3 { animation-delay: 0.6s; }
 .delay-4 { animation-delay: 0.8s; }
 
-/* ===== UTILITY ===== */
+/* Glass Panel */
 .glass-panel {
-  background: rgba(10, 10, 25, 0.7);
+  background: rgba(10, 10, 25, 0.8);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(139, 92, 246, 0.2);
+  border: 1px solid rgba(244, 63, 94, 0.2);
   border-radius: 24px;
 }
+
+/* Name Gradient */
 .name-gradient {
-  background: linear-gradient(135deg, #fff 20%, #c084fc 40%, #818cf8 60%, #fff 80%);
+  background: linear-gradient(135deg, #fff 20%, #f43f5e 40%, #c084fc 60%, #fff 80%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: shine 4s linear infinite;
 }
-@keyframes shine { 0% { background-position: 0% center; } 100% { background-position: 200% center; } }
-.social-icon {
-  transition: 0.3s;
-}
-.social-icon:hover {
-  transform: translateY(-6px) scale(1.15);
-  filter: brightness(1.3);
-}
-.wa-pulse {
-  animation: pulse-green 2s infinite;
-}
+@keyframes shine { 0% { background-position: 0%; } 100% { background-position: 200%; } }
+
+/* Social Icons */
+.social-icon { transition: all 0.3s; }
+.social-icon:hover { transform: translateY(-6px) scale(1.15); }
+
+/* WhatsApp Pulse */
+.wa-pulse { animation: pulse-green 2s infinite; }
 @keyframes pulse-green { 0% { box-shadow: 0 0 0 0 #22c55e; } 70% { box-shadow: 0 0 0 18px transparent; } }
 </style>
 </head>
 <body>
 
+<!-- AUDIO: Plays automatically at 50% volume -->
+<script>
+  window.addEventListener('load', function() {
+    const audio = document.getElementById('bgSong');
+    if(audio) {
+      audio.volume = 0.5; // Set to 50% volume
+      audio.play().catch(e => console.log('Auto-play prevented, user must interact first'));
+    }
+  });
+</script>
+
+<!-- Volume Control Slider -->
+<div id="volume-control">
+  <iconify-icon icon="mdi:music" class="text-pink-400"></iconify-icon>
+  <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.5">
+  <span id="volume-percent">50%</span>
+</div>
+
 <!-- ORBITING PHOTO (1758767366716.jpg) -->
 <div id="orbiting-photo">
-  <img src="1758767366716.jpg" alt="orbit" onerror="this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22100%22%20height%3D%22100%22%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2245%22%20fill%3D%22%236366f1%22%2F%3E%3Ctext%20x%3D%2250%22%20y%3D%2265%22%20font-size%3D%2230%22%20fill%3D%22white%22%20text-anchor%3D%22middle%22%3EAR%3C%2Ftext%3E%3C%2Fsvg%3E'">
+  <img src="1758767366716.jpg" alt="orbit" onerror="this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22100%22%20height%3D%22100%22%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2245%22%20fill%3D%22%23f43f5e%22%2F%3E%3Ctext%20x%3D%2250%22%20y%3D%2265%22%20font-size%3D%2230%22%20fill%3D%22white%22%20text-anchor%3D%22middle%22%3EAR%3C%2Ftext%3E%3C%2Fsvg%3E'">
 </div>
 
-<!-- ORBITING STAR -->
-<div id="orbit-star">
-  <span>✨</span>
-</div>
+<!-- FLOATING STAR -->
+<div id="floating-star">⭐</div>
 
-<!-- ORBITING NAME LETTERS (A S H A N R E N U J A) -->
-<div id="orbit-letters"></div>
+<!-- NAME LETTERS (Rhythm Based) -->
+<div id="rhythm-letters-container"></div>
+
+<!-- 10 HEARTS -->
+<div id="hearts-container"></div>
+
+<!-- NEW ICONS (🥁 💿 🎙️ 🌹 🌺 🏵️) -->
+<div id="icons-container"></div>
 
 <!-- NAVIGATION -->
-<nav class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-xl border-b border-purple-500/20 py-3">
+<nav class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-xl border-b border-pink-500/20 py-3">
   <div class="max-w-6xl mx-auto px-6 flex justify-between items-center">
     <div class="flex items-center gap-3">
-      <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center text-white font-bold shadow-lg">AR</div>
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-pink-600 to-purple-600 flex items-center justify-center text-white font-bold shadow-lg">AR</div>
       <div>
-        <div class="text-indigo-300 text-xs leading-tight">අශාන් රේණුජ</div>
+        <div class="text-pink-300 text-xs leading-tight">අශාන් රේණුජ</div>
         <div class="text-white font-bold">Ashan Renuja</div>
       </div>
     </div>
     <div class="flex gap-2">
-      <button class="px-4 py-1.5 bg-indigo-600/20 border border-indigo-500/30 rounded-full text-indigo-300 text-sm">CV</button>
+      <button class="px-4 py-1.5 bg-pink-600/20 border border-pink-500/30 rounded-full text-pink-300 text-sm">CV</button>
       <button onclick="alert('WhatsApp: +94754806291')" class="px-4 py-1.5 bg-green-600/20 border border-green-500/30 rounded-full text-green-300 text-sm flex items-center gap-1"><iconify-icon icon="mdi:whatsapp"></iconify-icon> Chat</button>
     </div>
   </div>
 </nav>
 
-<!-- MAIN HERO SECTION -->
+<!-- HERO SECTION -->
 <section class="min-h-screen pt-28 pb-12 flex items-center">
   <div class="max-w-6xl mx-auto px-6 w-full">
     <div class="grid lg:grid-cols-2 gap-12 items-center">
       
-      <!-- LEFT: Text Content with PDF Data -->
+      <!-- LEFT: PDF Content -->
       <div>
-        <div class="inline-block px-4 py-1.5 bg-purple-500/10 border border-purple-500/30 rounded-full text-purple-300 text-sm mb-6 reveal">
-          🎨 Graphic Designer | Adobe Expert
+        <div class="inline-block px-4 py-1.5 bg-pink-500/10 border border-pink-500/30 rounded-full text-pink-300 text-sm mb-6">
+          🎵 One Day - ARASH feat. Helena | Graphic Designer
         </div>
-        <h1 class="text-5xl md:text-7xl font-black mb-4 reveal">
+        <h1 class="text-5xl md:text-7xl font-black mb-4">
           <span class="name-gradient">Ashan</span><br>
           <span class="name-gradient">Renuja</span>
         </h1>
         
-        <!-- Contact Info from PDF -->
-        <div class="space-y-2 mb-6 text-slate-300 reveal">
-          <div class="flex items-center gap-3"><iconify-icon icon="mdi:map-marker" class="text-indigo-400"></iconify-icon> Lassegama Estate, Deraniyagala, Sri Lanka</div>
+        <!-- Contact Info -->
+        <div class="space-y-2 mb-6 text-slate-300">
+          <div class="flex items-center gap-3"><iconify-icon icon="mdi:map-marker" class="text-pink-400"></iconify-icon> Lassegama Estate, Deraniyagala, Sri Lanka</div>
           <div class="flex items-center gap-3"><iconify-icon icon="mdi:whatsapp" class="text-green-400"></iconify-icon> +94 75 480 6291 (WhatsApp / Mobile)</div>
           <div class="flex items-center gap-3"><iconify-icon icon="mdi:email" class="text-pink-400"></iconify-icon> ashanrenuja889@gmail.com</div>
           <div class="flex items-center gap-3"><iconify-icon icon="mdi:linkedin" class="text-blue-400"></iconify-icon> linkedin.com/in/ashan-renuja1</div>
         </div>
 
-        <!-- Summary from PDF -->
-        <div class="glass-panel p-5 mb-6 reveal">
+        <!-- Summary -->
+        <div class="glass-panel p-5 mb-6">
           <p class="text-sm leading-relaxed">I am a creative Graphic Designer skilled in Adobe Photoshop, Illustrator, and InDesign. I specialize in creating professional logos, social media graphics, and print layouts. I am passionate about bringing ideas to life through high-quality visual design and am currently looking for new creative opportunities.</p>
         </div>
 
-        <!-- Top Skills from PDF -->
-        <div class="flex flex-wrap gap-3 mb-6 reveal">
-          <span class="px-4 py-2 bg-indigo-500/20 border border-indigo-500/30 rounded-full text-sm font-medium">🎯 Graphic Design</span>
+        <!-- Top Skills -->
+        <div class="flex flex-wrap gap-3 mb-6">
+          <span class="px-4 py-2 bg-pink-500/20 border border-pink-500/30 rounded-full text-sm font-medium">🎯 Graphic Design</span>
           <span class="px-4 py-2 bg-purple-500/20 border border-purple-500/30 rounded-full text-sm font-medium">📘 Adobe Photoshop</span>
-          <span class="px-4 py-2 bg-pink-500/20 border border-pink-500/30 rounded-full text-sm font-medium">✒️ Adobe Illustrator</span>
+          <span class="px-4 py-2 bg-blue-500/20 border border-blue-500/30 rounded-full text-sm font-medium">✒️ Adobe Illustrator</span>
         </div>
 
         <!-- Social Links -->
-        <div class="flex gap-4 reveal">
+        <div class="flex gap-4">
           <a href="https://www.tiktok.com/@ashanrenuja607?_r=1&_t=ZP-94Nkrc1iKq6" target="_blank" class="social-icon w-12 h-12 rounded-full bg-black border border-white/20 flex items-center justify-center text-xl hover:border-pink-400"><iconify-icon icon="ic:baseline-tiktok"></iconify-icon></a>
           <a href="https://www.facebook.com/share/1Z13Xqxv5F/" target="_blank" class="social-icon w-12 h-12 rounded-full bg-black border border-white/20 flex items-center justify-center text-xl hover:border-blue-400"><iconify-icon icon="mdi:facebook"></iconify-icon></a>
           <a href="https://www.linkedin.com/in/ashan-renuja1" target="_blank" class="social-icon w-12 h-12 rounded-full bg-black border border-white/20 flex items-center justify-center text-xl hover:border-blue-500"><iconify-icon icon="mdi:linkedin"></iconify-icon></a>
@@ -238,15 +308,15 @@ body {
         </div>
       </div>
 
-      <!-- RIGHT: Main Photo (1758767410766.jpg) with SWAY animation -->
-      <div class="relative flex justify-center reveal">
+      <!-- RIGHT: Main Photo with SWAY -->
+      <div class="relative flex justify-center">
         <div class="relative w-72 h-72 md:w-96 md:h-96 photo-sway">
-          <div class="absolute inset-0 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 blur-3xl opacity-30"></div>
-          <div class="relative w-full h-full rounded-full overflow-hidden border-4 border-indigo-500/50 shadow-2xl">
-            <img src="1758767410766.jpg" alt="Ashan" class="w-full h-full object-cover" onerror="this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22400%22%20height%3D%22400%22%3E%3Ccircle%20cx%3D%22200%22%20cy%3D%22200%22%20r%3D%22180%22%20fill%3D%22%234f46e5%22%2F%3E%3Ctext%20x%3D%22200%22%20y%3D%22240%22%20font-size%3D%2260%22%20fill%3D%22white%22%20text-anchor%3D%22middle%22%3EAR%3C%2Ftext%3E%3C%2Fsvg%3E'">
+          <div class="absolute inset-0 rounded-full bg-gradient-to-r from-pink-600 to-purple-600 blur-3xl opacity-30"></div>
+          <div class="relative w-full h-full rounded-full overflow-hidden border-4 border-pink-500/50 shadow-2xl">
+            <img src="1758767410766.jpg" alt="Ashan" class="w-full h-full object-cover" onerror="this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22400%22%20height%3D%22400%22%3E%3Ccircle%20cx%3D%22200%22%20cy%3D%22200%22%20r%3D%22180%22%20fill%3D%22%23ec4899%22%2F%3E%3Ctext%20x%3D%22200%22%20y%3D%22240%22%20font-size%3D%2260%22%20fill%3D%22white%22%20text-anchor%3D%22middle%22%3EAR%3C%2Ftext%3E%3C%2Fsvg%3E'">
           </div>
-          <div class="absolute -bottom-5 left-1/2 -translate-x-1/2 glass-panel px-5 py-2 rounded-full border border-indigo-500/30 whitespace-nowrap">
-            <div class="text-xs text-indigo-300">අශාන් රේණුජ</div>
+          <div class="absolute -bottom-5 left-1/2 -translate-x-1/2 glass-panel px-5 py-2 rounded-full border border-pink-500/30 whitespace-nowrap">
+            <div class="text-xs text-pink-300">අශාන් රේණුජ</div>
             <div class="text-white font-bold text-sm">Ashan Renuja</div>
           </div>
         </div>
@@ -255,122 +325,103 @@ body {
   </div>
 </section>
 
-<!-- DETAIL SECTIONS (with PDF Content + Animations) -->
+<!-- DETAIL SECTIONS (Same as before) -->
 <div class="max-w-6xl mx-auto px-6 pb-20 space-y-6">
-  
-  <!-- Experience Section -->
+  <!-- Experience -->
   <div class="section-card delay-1 glass-panel p-6">
-    <h2 class="text-2xl font-bold text-white mb-4 flex items-center gap-2"><iconify-icon icon="mdi:briefcase" class="text-indigo-400"></iconify-icon> පළපුරුද්ද / Experience</h2>
-    <div class="border-l-2 border-indigo-500/30 pl-4">
+    <h2 class="text-2xl font-bold text-white mb-4 flex items-center gap-2"><iconify-icon icon="mdi:briefcase" class="text-pink-400"></iconify-icon> පළපුරුද්ද / Experience</h2>
+    <div class="border-l-2 border-pink-500/30 pl-4">
       <div class="mb-3">
         <div class="font-semibold text-white">Freelance Graphic Designer</div>
-        <div class="text-sm text-indigo-300">Graphic Designer · July 2025 - Present (7 months)</div>
-        <p class="text-sm text-slate-400 mt-1">Self-employed freelance work creating brand identities, social media graphics, and print materials for various clients.</p>
+        <div class="text-sm text-pink-300">Graphic Designer · July 2025 - Present (7 months)</div>
+        <p class="text-sm text-slate-400 mt-1">Self-employed freelance work creating brand identities, social media graphics, and print materials.</p>
       </div>
     </div>
   </div>
-
-  <!-- Education Section -->
+  <!-- Education -->
   <div class="section-card delay-2 glass-panel p-6">
     <h2 class="text-2xl font-bold text-white mb-4 flex items-center gap-2"><iconify-icon icon="mdi:school" class="text-purple-400"></iconify-icon> අධ්‍යාපනය / Education</h2>
     <div class="space-y-3">
-      <div>
-        <div class="font-semibold text-white">Technical College Ratnapura</div>
-        <div class="text-sm text-purple-300">National Certificate in Graphic Design · (July 2025 - December 2025)</div>
-      </div>
-      <div>
-        <div class="font-semibold text-white">Ratnapura College of Technology</div>
-        <div class="text-sm text-purple-300">Certificate in Graphic Designing · (June 2025 - December 2025)</div>
-      </div>
-      <div>
-        <div class="font-semibold text-white">College of Technology - Ratnapura</div>
-        <div class="text-sm text-purple-300">Graphic Design Program</div>
-      </div>
+      <div><div class="font-semibold text-white">Technical College Ratnapura</div><div class="text-sm text-purple-300">National Certificate in Graphic Design · (July 2025 - Dec 2025)</div></div>
+      <div><div class="font-semibold text-white">Ratnapura College of Technology</div><div class="text-sm text-purple-300">Certificate in Graphic Designing · (June 2025 - Dec 2025)</div></div>
+      <div><div class="font-semibold text-white">College of Technology - Ratnapura</div><div class="text-sm text-purple-300">Graphic Design Program</div></div>
     </div>
   </div>
-
-  <!-- Skills Detail -->
+  <!-- Skills -->
   <div class="section-card delay-3 glass-panel p-6">
-    <h2 class="text-2xl font-bold text-white mb-4 flex items-center gap-2"><iconify-icon icon="mdi:star" class="text-pink-400"></iconify-icon> කුසලතා / Skills</h2>
+    <h2 class="text-2xl font-bold text-white mb-4 flex items-center gap-2"><iconify-icon icon="mdi:star" class="text-yellow-400"></iconify-icon> කුසලතා / Skills</h2>
     <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-      <div class="bg-indigo-500/10 p-3 rounded-xl text-center border border-indigo-500/20">
-        <div class="text-2xl mb-1">🎨</div>
-        <div class="font-medium text-white">Graphic Design</div>
-      </div>
-      <div class="bg-purple-500/10 p-3 rounded-xl text-center border border-purple-500/20">
-        <div class="text-2xl mb-1">📷</div>
-        <div class="font-medium text-white">Photoshop</div>
-      </div>
-      <div class="bg-pink-500/10 p-3 rounded-xl text-center border border-pink-500/20">
-        <div class="text-2xl mb-1">✒️</div>
-        <div class="font-medium text-white">Illustrator</div>
-      </div>
+      <div class="bg-pink-500/10 p-3 rounded-xl text-center border border-pink-500/20"><div class="text-2xl mb-1">🎨</div><div class="font-medium text-white">Graphic Design</div></div>
+      <div class="bg-purple-500/10 p-3 rounded-xl text-center border border-purple-500/20"><div class="text-2xl mb-1">📷</div><div class="font-medium text-white">Photoshop</div></div>
+      <div class="bg-blue-500/10 p-3 rounded-xl text-center border border-blue-500/20"><div class="text-2xl mb-1">✒️</div><div class="font-medium text-white">Illustrator</div></div>
     </div>
   </div>
-
   <!-- Contact Card -->
   <div class="section-card delay-4 glass-panel p-6 text-center">
     <h2 class="text-xl font-bold text-white mb-2">📞 කතා කරන්න / Get in Touch</h2>
-    <div class="flex justify-center gap-6 text-sm">
-      <div><iconify-icon icon="mdi:whatsapp" class="text-green-400 inline"></iconify-icon> +94 75 480 6291</div>
-      <div><iconify-icon icon="mdi:email" class="text-pink-400 inline"></iconify-icon> ashanrenuja889@gmail.com</div>
-    </div>
+    <div class="flex justify-center gap-6 text-sm"><div><iconify-icon icon="mdi:whatsapp" class="text-green-400 inline"></iconify-icon> +94 75 480 6291</div><div><iconify-icon icon="mdi:email" class="text-pink-400 inline"></iconify-icon> ashanrenuja889@gmail.com</div></div>
   </div>
 </div>
 
 <script>
-// ===== CREATE ORBITING LETTERS (ANIMATION 3) =====
-function createOrbitLetters() {
-  const container = document.getElementById('orbit-letters');
+// ===== CREATE RHYTHM LETTERS (ANIMATION 3 - Song Rhythm Based) =====
+function createRhythmLetters() {
+  const container = document.getElementById('rhythm-letters-container');
   if (!container) return;
   container.innerHTML = '';
-  const fullName = "ASHANRENUJA"; // 11 letters
-  const letters = fullName.split('');
+  const name = "ASHANRENUJA"; // 11 letters
+  const letters = name.split('');
   
-  letters.forEach((letter, index) => {
+  letters.forEach((letter, i) => {
     const el = document.createElement('div');
-    el.className = 'orbit-letter';
+    el.className = 'rhythm-letter';
     el.textContent = letter;
-    // Stagger the start times
-    el.style.setProperty('--delay', `-${index * 1.3}s`);
+    // Random start position
+    el.style.setProperty('--start-left', Math.random() * 100 + '%');
+    el.style.setProperty('--start-top', Math.random() * 100 + '%');
+    // Different delays for each letter to follow song rhythm
+    el.style.setProperty('--delay', `${i * 0.3}s`);
     container.appendChild(el);
   });
 }
 
-// ===== REVEAL ANIMATION ON SCROLL =====
-const reveals = document.querySelectorAll('.reveal');
-function checkReveal() {
-  reveals.forEach(el => {
-    const windowHeight = window.innerHeight;
-    const elementTop = el.getBoundingClientRect().top;
-    if (elementTop < windowHeight - 80) {
-      el.style.opacity = '1';
-      el.style.transform = 'translateY(0)';
-    } else {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(30px)';
-    }
+// ===== CREATE 10 HEARTS =====
+function createHearts() {
+  const container = document.getElementById('hearts-container');
+  if (!container) return;
+  container.innerHTML = '';
+  
+  for (let i = 0; i < 10; i++) {
+    const heart = document.createElement('div');
+    heart.className = 'floating-heart';
+    heart.innerHTML = '❤️';
+    heart.style.setProperty('--start-left', Math.random() * 100 + '%');
+    heart.style.setProperty('--start-top', Math.random() * 100 + '%');
+    heart.style.setProperty('--delay', `${i * 0.5}s`);
+    container.appendChild(heart);
+  }
+}
+
+// ===== CREATE NEW ICONS (🥁💿🎙️🌹🌺🏵️) =====
+function createIcons() {
+  const container = document.getElementById('icons-container');
+  if (!container) return;
+  container.innerHTML = '';
+  
+  const icons = ['🥁', '💿', '🎙️', '🌹', '🌺', '🏵️'];
+  
+  icons.forEach((icon, i) => {
+    const el = document.createElement('div');
+    el.className = 'floating-icon';
+    el.innerHTML = icon;
+    el.style.setProperty('--start-left', Math.random() * 100 + '%');
+    el.style.setProperty('--start-top', Math.random() * 100 + '%');
+    el.style.setProperty('--delay', `${i * 0.7}s`);
+    container.appendChild(el);
   });
 }
 
-// ===== INIT =====
-window.addEventListener('load', () => {
-  createOrbitLetters();
-  checkReveal();
-  // Set initial reveal styles
-  reveals.forEach(el => {
-    el.style.transition = 'all 0.8s cubic-bezier(0.2, 0.9, 0.3, 1)';
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(30px)';
-  });
-});
-
-window.addEventListener('scroll', checkReveal);
-
-// ===== HELPER FUNCTIONS =====
-function toggleMsg() {
-  alert('WhatsApp: +94754806291\nEmail: ashanrenuja889@gmail.com');
-}
-</script>
-</body>
-            </html>
+// ===== VOLUME CONTROL =====
+const audio = document.getElementById('bgSong');
+const slider = document.getElementById('volume-slider');
+const percent = do
